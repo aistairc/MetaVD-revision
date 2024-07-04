@@ -1,0 +1,17 @@
+# Find equal links based on the transitive property
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX id: <http://togodb.org/metavd/>
+
+SELECT distinct ?obj_n ?obj ?ex_n ?ex WHERE {
+  VALUES ?focus_rel { skos:exactMatch }
+  ?sbj ?focus_rel ?obj ;
+       rdfs:label ?sbj_n ;
+       skos:exactMatch ?ex .
+  ?obj rdfs:label ?obj_n .
+  ?ex rdfs:label ?ex_n .
+  MINUS {?ex ?focus_rel ?obj .}
+  FILTER (?ex != ?obj)
+}

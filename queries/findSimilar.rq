@@ -1,0 +1,15 @@
+# Find similar links based on the transitive property and equal links
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+CONSTRUCT {
+  ?ex ?focus_rel ?obj .
+  ?obj ?focus_rel ?ex . # <- 追加忘れ (2024/2/14発覚)
+} WHERE {
+  VALUES ?focus_rel { skos:related }
+  ?sbj ?focus_rel ?obj ;
+       skos:exactMatch ?ex .
+  MINUS {?ex ?rel ?obj .}
+}
