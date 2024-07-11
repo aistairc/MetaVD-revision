@@ -8,3 +8,5 @@ The `queries` directory contains queries to check or edit an RDF dataset.
 
 We loaded the RDF dataset to [Apache Jena Fuseki](https://jena.apache.org/documentation/fuseki2/) Ver. 4.7.0.
 
+Our basic idea to find a missing link is described in the following figure.
+![Basic idea to find a missing link](KG_revise_basic_idea.png)
